@@ -1,11 +1,9 @@
 People Picture Sort
 ===================
 
-Super simple Python script that detects and copies images with people to one folder and remaining pictures with no 
-people present to a different folder
+Super simple Python script that detects and copies images with people to one folder and remaining pictures with no people present to a different folder
 
-I have may thousands of unsorted images on my mobile phone and needed to seperate all the images containing 
-people (likely my family) from random junk.  
+I have many thousands of unsorted images on my mobile phone and needed to seperate all the images containing people (likely my family) from random junk.  
 
 This script is less than 100 lines of Python that implements a "person" detector using Pytorch and a pre-trained RetinaNet to sort through all my photos.
 
