@@ -4,7 +4,6 @@ import shutil
 import cv2
 import PIL
 import numpy as np
-
 import torch
 from torchvision import models, transforms
 
@@ -49,17 +48,17 @@ cv2.namedWindow('no_person',cv2.WINDOW_NORMAL)
 print ("Sorting...")
 for file_path in all_files:
     file_ext = str.upper(pathlib.Path(file_path).suffix)
+
     if file_ext  == ".JPG":
-        
         # read image & resize
         pil_image = PIL.Image.open(file_path)
         pil_image = pil_image.resize(image_res)
         
-        # Convert to Tensor & Add batch dimension
+        # Convert to Tensor & Add batch dimension for single batch
         transform = transforms.ToTensor()
         tensor_img = transform(pil_image).unsqueeze(0).to(model_device)
                
-        # Run Model
+        # Run Model & return the first batch (batch size here is 1)
         detections = model(tensor_img)[0]        
 
         # create openCV image for display
@@ -69,9 +68,10 @@ for file_path in all_files:
         # loop over the detections
         person_found = False
         for i in range(0, len(detections["boxes"])):
-            
             confidence = detections["scores"][i]
             idx = int(detections["labels"][i])
+
+            # Only include detections of people (labels index 1) above a certain threshold
             if confidence > person_threshold and idx == 1:
                 person_found = True
                 
@@ -85,7 +85,7 @@ for file_path in all_files:
                 y = startY - 15 if startY - 15 > 15 else startY + 15
                 cv2.putText(img_cv, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,255), 2)
 
-        # Copy files & display the output
+        # Copy files & display the output for persona and non-person imagages
         if person_found:
             shutil.copy(file_path, target_folder_person + "/")
             cv2.imshow('person', img_cv)
