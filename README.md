@@ -1,7 +1,7 @@
 People Picture Sort
 ===================
 
-Super simple Python script that detects and copies images with people to one folder and remain pictures with no 
+Super simple Python script that detects and copies images with people to one folder and remaining pictures with no 
 people present to a different folder
 
 I have may thousands of unsorted images on my mobile phone and needed to seperate all the images containing 
