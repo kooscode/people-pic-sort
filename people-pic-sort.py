@@ -46,6 +46,7 @@ cv2.namedWindow('person',cv2.WINDOW_NORMAL)
 cv2.namedWindow('no_person',cv2.WINDOW_NORMAL)
 
 # Iterate through all images for .jpg files
+print ("Sorting...")
 for file_path in all_files:
     file_ext = str.upper(pathlib.Path(file_path).suffix)
     if file_ext  == ".JPG":
@@ -68,6 +69,7 @@ for file_path in all_files:
         # loop over the detections
         person_found = False
         for i in range(0, len(detections["boxes"])):
+            
             confidence = detections["scores"][i]
             idx = int(detections["labels"][i])
             if confidence > person_threshold and idx == 1:
@@ -95,6 +97,8 @@ for file_path in all_files:
         x = cv2.waitKey(1)
         if x == 27:
             exit()
+
+print ("Done!")
 
 
 
