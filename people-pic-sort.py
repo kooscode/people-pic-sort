@@ -83,7 +83,7 @@ for file_path in all_files:
                 y = startY - 15 if startY - 15 > 15 else startY + 15
                 cv2.putText(img_cv, label, (startX, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,255), 2)
 
-        # Display the output
+        # Copy files & display the output
         if person_found:
             shutil.copy(file_path, target_folder_person + "/")
             cv2.imshow('person', img_cv)
